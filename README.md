@@ -9,3 +9,7 @@
 ### Server
 - [ ] **Wait for connection from device**
 - [ ] Receive data from device
+
+
+#### Links
+- https://wiki.seeedstudio.com/Seeeduino-XIAO/
