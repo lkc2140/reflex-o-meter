@@ -2,10 +2,10 @@
 
 ## Project plan
 ### Device
-- [ ] Connect to server via BLE
+- [ ] **Connect to server via BLE**
 - [ ] Send data from device via BLE
 
 
 ### Server
-- [ ] Wait for connection from device
+- [ ] **Wait for connection from device**
 - [ ] Receive data from device
