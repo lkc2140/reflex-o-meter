@@ -25,12 +25,13 @@ void setup()
     pinMode(LED_PINS[i], OUTPUT);
     digitalWrite(LED_PINS[i], HIGH);    // turn the LED off by making the voltage HIGH
   }
-  digitalWrite(LED_GREEN, LOW);  // HIGH is OFF, LOW is ON ... smh
+  digitalWrite(LED_RED, LOW);  // HIGH is OFF, LOW is ON ... smh
 
   // Init Serial
   Serial.begin(115200);
-  while ( !Serial ) delay(10);
   Serial.println("Starting...");
+  digitalWrite(LED_RED, HIGH);
+  digitalWrite(LED_GREEN, LOW);
   
   Bluefruit.begin();
   Bluefruit.setName("Reflex-o-meter");
