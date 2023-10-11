@@ -1,5 +1,6 @@
 import asyncio
 from bleak import BleakScanner, BleakClient
+import struct
 
 TARGET_DEVICE_NAME = "Reflex-o-meter"  # The name you set in the Arduino code
 OUTPUT_FILE = "data.txt"
@@ -12,6 +13,10 @@ async def run():
     devices = await BleakScanner.discover(10)
     target_device = None
 
+    print("Found %d devices" % len(devices))
+    for device in devices:
+        print(device.name, device.address)
+
     for device in devices:
         if device.name is not None and TARGET_DEVICE_NAME in device.name:
             target_device = device
@@ -20,15 +25,24 @@ async def run():
     if not target_device:
         print(f"Device with name {TARGET_DEVICE_NAME} not found!")
         return
+    else:
+        print(f"Found device {TARGET_DEVICE_NAME} with address {target_device.address}")
 
+    print("Connecting to device...")
     async with BleakClient(target_device.address) as client:
+        print("Reading data...")
         while True:
-            x_value = float(await client.read_gatt_char(IMU_X_UUID))
-            y_value = float(await client.read_gatt_char(IMU_Y_UUID))
-            z_value = float(await client.read_gatt_char(IMU_Z_UUID))
+            x_data = await client.read_gatt_char(IMU_X_UUID)
+            y_data = await client.read_gatt_char(IMU_Y_UUID)
+            z_data = await client.read_gatt_char(IMU_Z_UUID)
+
+            x_value = struct.unpack('f', x_data)[0]
+            y_value = struct.unpack('f', y_data)[0]
+            z_value = struct.unpack('f', z_data)[0]
             
             with open(OUTPUT_FILE, "a") as f:
                 f.write(f"{x_value}, {y_value}, {z_value}\n")
+                print(f"{x_value}, {y_value}, {z_value}")
 
             await asyncio.sleep(1)
 
