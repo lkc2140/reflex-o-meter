@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "reflex-py"
+		},
+		{
+			"path": "reflex-device"
+		},
+		{
+			"path": "xiao-imu"
+		}
+	],
+	"settings": {}
+}

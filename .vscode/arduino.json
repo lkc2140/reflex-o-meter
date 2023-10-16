@@ -1,0 +1,8 @@
+{
+    "configuration": "softdevice=s140v6,debug=l0",
+    "board": "Seeeduino:nrf52:xiaonRF52840Sense",
+    "port": "COM12",
+    "programmer": "nrfutil_boot",
+    "sketch": "reflex-device\\reflex-device.ino",
+    "output": "build"
+}
